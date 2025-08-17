@@ -12,8 +12,6 @@ O objetivo é treinar **modelagem de dados**, criação de tabelas e relacioname
 - Chaves Primárias e Estrangeiras  
 - Constraints (`NOT NULL`, `UNIQUE`, `AUTO_INCREMENT`)  
 - Relacionamentos 1:N e N:N  
-- Consultas (`SELECT`)  
-- Inserções, Atualizações e Exclusões (`INSERT`, `UPDATE`, `DELETE`)  
 - Diferenças entre MySQL e SQL Server  
 
 ---
