@@ -141,8 +141,24 @@ from tb_projeto_empregados tbpe join tb_empregados tbe
 								join tb_projetos tbp
 on projeto_id = id_projeto && id_empregado = empregado_id
 group by projeto_id, tbp.nome
-order by count(empregado_id) desc
+order by count(empregado_id) desc;
 
+#4. Agrupe os funcionários por departamento, e liste o departamento
+# que possui a maior soma de salários.
+select departamento_id as Departamento, sum(salario) as Soma_Salario
+from tb_departamentos tbd join tb_empregados
+group by departamento_id
+order by sum(salario) desc limit 1;
 
+#5. Agrupe projetos por funcionários e liste qual projeto possui a maior média salarial.
+select projeto_id as Projeto, avg(salario)
+from tb_empregados join tb_projeto_empregados
+group by projeto_id
+order by avg(salario) desc limit 1;
 
-
+#6. Agrupe projetos por funcionários e liste os projetos que possuem apenas mulheres.
+select projeto_id as Projeto, count(case when sexo = 2 then 1 end) as Contagem
+from tb_empregados join tb_projeto_empregados
+on empregado_id = id_empregado 
+group by projeto_id
+having count(case when sexo = 1 then 1 end) = 0
