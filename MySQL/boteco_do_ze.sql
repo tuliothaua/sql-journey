@@ -122,9 +122,41 @@ alter table itens_drinks add constraint fk_itens_drink_produto foreign key (drin
 alter table itens_drinks add constraint fk_itens_drink_funcionario foreign key (funcionario_id) references funcionarios(id_funcionario);
 
 alter table lanches add constraint fk_lanche_categoria foreign key (categoria_id) references categorias(id_categoria);
+######################################################################
+########################Tulio Thauã Dutra#############################
+######## COLOQUE AQUI OS SEUS NOVOS CREATES E ALTER TABLES ###########
+
+#Sistema de Gerenciamento de Fornecedores:
+create table tb_fornecedores (
+	id_fornecedor int primary key auto_increment,
+    nome_fornecedor varchar(50) not null,
+    cnpj_fornecedor varchar(20) not null,
+    telefone_fornecedor varchar(20) not null,
+    email_fornecedor varchar(100),
+    end_fornecedor varchar(200)    
+);
+
+create table tb_compra_fornecedores (
+	id_compra_fornecedor int primary key auto_increment,
+    fornecedor_id int not null,
+    data_compra date not null, 
+    valor_total decimal(10,2), 
+    foreign key (fornecedor_id) references tb_fornecedores(id_fornecedor)
+);
+
+create table tb_itens_compras_fornecedores (
+	id_itens_compras_fornecedores int primary key auto_increment,
+    compra_fornecedor_id int not null,
+    produto_id int not null, 
+    quantidade int not null,
+    valor_unitario decimal(10,2) not null,
+    foreign key (compra_fornecedor_id) references tb_compra_fornecedores(id_compra_fornecedor),
+    foreign key (produto_id) references produtos (id_produto)
+);
+
+alter table produtos add estoque int default 0;
 
 
-######## COLOQUE AQUI OS SEUS NOVOS CREATES E ALTER TABLES ##########
 
 
 
