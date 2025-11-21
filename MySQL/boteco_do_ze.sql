@@ -122,11 +122,10 @@ alter table itens_drinks add constraint fk_itens_drink_produto foreign key (drin
 alter table itens_drinks add constraint fk_itens_drink_funcionario foreign key (funcionario_id) references funcionarios(id_funcionario);
 
 alter table lanches add constraint fk_lanche_categoria foreign key (categoria_id) references categorias(id_categoria);
-######################################################################
-########################Tulio Thauã Dutra#############################
+
 ######## COLOQUE AQUI OS SEUS NOVOS CREATES E ALTER TABLES ###########
 
-#Sistema de Gerenciamento de Fornecedores:
+#1 - Sistema de Gerenciamento de Fornecedores:
 create table tb_fornecedores (
 	id_fornecedor int primary key auto_increment,
     nome_fornecedor varchar(50) not null,
@@ -155,6 +154,20 @@ create table tb_itens_compras_fornecedores (
 );
 
 alter table produtos add estoque int default 0;
+
+#2 - Sistema de Registro de Feedback do Cliente:
+create table tb_feedback_vendas (
+	id_feedback_vendas int primary key auto_increment,
+    cliente_id int not null, 
+    venda_id int not null,
+    nota int,
+    comentario varchar(500),
+    data_feedback date,
+    foreign key (cliente_id) references clientes (id_cliente),
+    foreign key (venda_id) references vendas (id_venda)
+);
+
+
 
 
 
