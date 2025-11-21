@@ -168,6 +168,34 @@ create table tb_feedback_vendas (
 );
 
 
+#3 - Sistema de Fiado:
+
+#guarda cada pagamento realizado
+create table tb_pagamento_fiado (
+	id_pagamento_fiado int primary key auto_increment,
+    cliente_id int not null,
+    data_pagamento date not null,
+    valor_pago decimal(10,2) not null,
+    foreign key (cliente_id) references clientes(id_cliente)
+);
+
+#relaciona o pagamento com varias vendas pendente
+create table tb_pagamento_fiado_vendas (
+	pagamento_fiado_id int not null,
+    venda_id int not null,
+    valor_quitado decimal (10,2),
+    foreign key (pagamento_fiado_id) references tb_pagamento_fiado(id_pagamento_fiado),
+    foreign key (venda_id) references vendas (id_venda)
+);
+
+# adiciona o campo na venda pra marcar o fiado
+alter table vendas add fiado boolean default false;
+alter table vendas add valor_em_aberto decimal(10,2) default 0;
+
+
+
+
+
 
 
 
