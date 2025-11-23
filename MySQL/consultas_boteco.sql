@@ -26,3 +26,9 @@ group by f.nome_funcionario;
 select f.nome_funcionario, sum(itd.qtde * itd.valor_unitario) as total
 from funcionarios f join itens_drinks itd on itd.funcionario_id = f.id_funcionario
 group by f.nome_funcionario;
+
+-- Relatorio de vendas de desconto por cliente
+select c.nome_cliente, v.desconto
+from vendas v
+join clientes c on c.id_cliente = v.cliente_id
+where v.desconto > 0;
