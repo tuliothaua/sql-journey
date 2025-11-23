@@ -32,3 +32,22 @@ select c.nome_cliente, v.desconto
 from vendas v
 join clientes c on c.id_cliente = v.cliente_id
 where v.desconto > 0;
+
+-- Faturamento mensal por tipo de item 
+#Produtos:
+select month(v.data_venda) as mes, sum(ip.qtde * ip.valor_unitario) as total
+from itens_produtos ip
+join vendas v on v.id_venda = ip.venda_id
+group by mes;
+
+#Lanches:
+select month(v.data_venda) as mes, sum(il.qtde * il.valor_unitario) as total
+from itens_lanches il
+join vendas v on v.id_venda = il.venda_id
+group by mes;
+
+#Drinks:
+select month(v.data_venda) as mes, sum(id.qtde * id.valor_unitario) as total
+from itens_drinks id
+join vendas v on v.id_venda = id.venda_id
+group by mes;
