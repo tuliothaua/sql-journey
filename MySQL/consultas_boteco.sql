@@ -76,3 +76,11 @@ select
 from funcionarios f
 order by total_faturado desc
 limit 1;
+
+-- Qual Genero mais gastou?
+select c.genero, sum(v.valor_total) as total
+from vendas v
+join clientes c on c.id_cliente = v.cliente_id
+group by c.genero
+order by total desc
+limit 1;
