@@ -94,3 +94,28 @@ join tb_itens_compras_fornecedores ic
 group by p.nome_produto, p.valor
 order by lucro_unitario desc
 limit 5;
+
+-- O Mais vendido de cada tipo
+# Produtos:
+select p.nome_produto, sum(ip.qtde) as total
+from itens_produtos ip
+join produtos p on p.id_produto = ip.produto_id
+group by p.nome_produto
+order by total desc
+limit 1;
+
+#Drinks: 
+select d.nome_drink, sum(id.qtde) as total
+from itens_drinks id
+join drinks d on d.id_drink = id.drink_id
+group by d.nome_drink
+order by total desc
+limit 1;
+
+#Lanches:
+select l.nome_lanche, sum(il.qtde) as total
+from itens_lanches il
+join lanches l on l.id_lanche = il.lanche_id
+group by l.nome_lanche
+order by total desc
+limit 1;
