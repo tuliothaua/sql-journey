@@ -51,3 +51,28 @@ select month(v.data_venda) as mes, sum(id.qtde * id.valor_unitario) as total
 from itens_drinks id
 join vendas v on v.id_venda = id.venda_id
 group by mes;
+
+-- Funcionario que mais faturou 
+select 
+    f.nome_funcionario,
+    
+    -- total em produtos
+    (select sum(ip.qtde * ip.valor_unitario)
+     from itens_produtos ip
+     where ip.funcionario_id = f.id_funcionario) +
+     
+    -- total em lanches
+    (select sum(il.qtde * il.valor_unitario)
+     from itens_lanches il
+     where il.funcionario_id = f.id_funcionario) +
+     
+    -- total em drinks
+    (select sum(idr.qtde * idr.valor_unitario)
+     from itens_drinks idr
+     where idr.funcionario_id = f.id_funcionario)
+     
+    as total_faturado
+
+from funcionarios f
+order by total_faturado desc
+limit 1;
