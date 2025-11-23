@@ -84,3 +84,13 @@ join clientes c on c.id_cliente = v.cliente_id
 group by c.genero
 order by total desc
 limit 1;
+
+-- 5 produtos que mais dão lucro!
+select p.nome_produto,
+       (p.valor - avg(ic.valor_unitario)) as lucro_unitario
+from produtos p
+join tb_itens_compras_fornecedores ic
+     on ic.produto_id = p.id_produto
+group by p.nome_produto, p.valor
+order by lucro_unitario desc
+limit 5;
